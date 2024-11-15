@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Management - LUXE Hotel</title>
+    <link rel="stylesheet" href="/style1.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Room Management</h1>
+        <p>LUXE Hotel</p>
+    </div>
+
+    <div class="container">
+        <a href="/" class="back-btn">Back to Home</a>
+
+        <div class="form">
+            <h2>Add New Room</h2>
+            <form action="/add-rooms" method="POST">
+                <div class="form-group">
+                    <label for="room_number">Room Number</label>
+                    <input type="text" id="room_number" name="roomNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="room_type_id">Room Type ID</label>
+                    <input type="text" id="room_type_id" name="roomTypeId" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="text" id="price" name="price" required>
+                </div>
+               
+                <button type="submit" class="submit-btn">Add Room</button>
+            </form>
+        </div>
+
+        <div class="container form">
+            <button id="showRoomsBtn" class="submit-btn">Show Rooms</button>
+            <div id="roomList" style="display: none;">
+                <h2>Room List</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room ID</th>
+                            <th>Room Number</th>
+                            <th>Room Type ID</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Created At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="roomData">
+                        <!-- Room data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Update Room Form -->
+        <div class="form" id="updateForm" style="display: none;">
+            <h2>Update Room</h2>
+            <form action="/update-room" method="POST" id="updateRoomForm">
+                <input type="hidden" id="updateRoomId" name="room_id">
+
+                <div class="form-group">
+                    <label for="updateRoomNumber">Room Number</label>
+                    <input type="text" id="updateRoomNumber" name="room_number" required>
+                </div>
+                <div class="form-group">
+                    <label for="updateRoomTypeId">Room Type ID</label>
+                    <input type="text" id="updateRoomTypeId" name="room_type_id" required>
+                </div>
+                <div class="form-group">
+                    <label for="updatePrice">Price</label>
+                    <input type="text" id="updatePrice" name="price" required>
+                </div>
+                <div class="form-group">
+                    <label for="updateStatus">Status</label>
+                    <select id="updateStatus" name="status" required>
+                        <option value="Available">Available</option>
+                        <option value="Occupied">Occupied</option>
+                        <option value="Maintenance">Maintenance</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Update Room</button>
+            </form>
+        </div>
+
+        <div class="container form">
+            <button id="showRoomsBtn" class="submit-btn">Show Rooms</button>
+            <div id="roomList" style="display: none;">
+                <h2>Room List</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room ID</th>
+                            <th>Room Number</th>
+                            <th>Room Type ID</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Created At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="roomData">
+                        <!-- Room data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script>
+            // Show room data and open update form
+            function openUpdateForm(roomId) {
+                fetch(`/get-room/${roomId}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        document.getElementById('updateRoomId').value = data.room_id;
+                        document.getElementById('updateRoomNumber').value = data.room_number;
+                        document.getElementById('updateRoomTypeId').value = data.room_type_id;
+                        document.getElementById('updatePrice').value = data.price;
+                        document.getElementById('updateStatus').value = data.status;
+
+                        // Show the update form
+                        document.getElementById('updateForm').style.display = 'block';
+                    })
+                    .catch(error => console.error('Error fetching room data:', error));
+            }
+
+            // Fetch room list data
+            document.getElementById('showRoomsBtn').addEventListener('click', () => {
+                fetch('/fetch-rooms')
+                    .then(response => response.json())
+                    .then(data => {
+                        const roomData = document.getElementById('roomData');
+                        roomData.innerHTML = '';
+                        data.forEach(room => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${room.room_id}</td>
+                                <td>${room.room_number}</td>
+                                <td>${room.room_type_id}</td>
+                                <td>${room.price}</td>
+                                <td>${room.status}</td>
+                                <td>${room.created_at}</td>
+                                <td><button onclick="openUpdateForm(${room.room_id})">Edit</button></td>
+                            `;
+                            roomData.appendChild(row);
+                        });
+                        document.getElementById('roomList').style.display = 'block';
+                    })
+                    .catch(error => console.error('Error fetching room data:', error));
+            });
+        </script>
+    </body>
+</html>

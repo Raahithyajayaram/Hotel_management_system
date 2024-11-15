@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Management - LUXE Hotel</title>
+    <link rel="stylesheet" href="/style1.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Staff Management</h1>
+        <p>LUXE Hotel</p>
+    </div>
+
+    <div class="container">
+        <a href="/" class="back-btn">Back to Home</a>
+        
+        <div class="form">
+            <h2>Add New Staff Member</h2>
+            <form id="staffForm" action="/add-staff" method="POST">
+                <div class="form-group">
+                    <label for="staffId">Staff ID</label>
+                    <input type="text" id="staffId" name="staffId" required>
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="position">Position</label>
+                    <input type="text" id="position" name="position" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <button type="submit" class="submit-btn">Add Staff Member</button>
+            </form>
+        </div>
+
+        <div class="staff-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Staff ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Position</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Sample data - This will be populated by the backend -->
+                    <tr>
+                        <td>ST001</td>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>Manager</td>
+                        <td>john.doe@luxe.com</td>
+                        <td>+1 234-567-8901</td>
+                        <td>2024-01-01</td>
+                    </tr>
+                    <tr>
+                        <td>ST002</td>
+                        <td>Jane</td>
+                        <td>Smith</td>
+                        <td>Receptionist</td>
+                        <td>jane.smith@luxe.com</td>
+                        <td>+1 234-567-8902</td>
+                        <td>2024-01-15</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

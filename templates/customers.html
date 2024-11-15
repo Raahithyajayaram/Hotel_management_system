@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Management - LUXE Hotel</title>
+    <link rel="stylesheet" href="/style2.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Customer Management</h1>
+        <p>LUXE Hotel</p>
+    </div>
+
+    <div class="container form">
+        <a href="/" class="back-btn">Back to Home</a>
+
+        <!-- Form to add new customer -->
+        <div class="customer-form">
+            <h2>Add New Customer</h2>
+            <form id="customerForm" action="/add-customer" method="POST">
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone_number">Phone Number</label>
+                    <input type="tel" id="phone_number" name="phone_number" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+                <button type="submit" class="submit-btn">Add Customer</button>
+            </form>
+        </div>
+
+        <!-- Form to search customers by room type -->
+        <div class="search-form">
+            <h2>Search Customers by Room Type</h2>
+            <form id="roomSearchForm" action="/search-customers" method="POST">
+                <div class="form-group">
+                    <label for="room_type_id">Room Type</label>
+                    <select id="room_type_id" name="room_type_id" required>
+                        <option value="1">Suite</option>
+                        <option value="2">Deluxe</option>
+                        <!-- Add other room types dynamically if needed -->
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Search</button>
+            </form>
+        </div>
+
+        <!-- Table to display customers based on room type -->
+        
+    </div>
+
+    <script>
+        // JavaScript to handle form submission and display customer data
+        document.getElementById('roomSearchForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+        
+            const roomTypeId = document.getElementById('room_type_id').value;
+            console.log('Selected Room Type ID:', roomTypeId); // Log roomTypeId to check its value
+        
+            if (!roomTypeId) {
+                console.error('Room Type ID is undefined or empty');
+                return;
+            }
+        
+            // Make AJAX POST request to the server to fetch customer data based on room_type_id
+            fetch('/search-customers', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ room_type_id: roomTypeId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Clear the previous table contents
+                const tableBody = document.getElementById('customerTableBody');
+                tableBody.innerHTML = '';
+        
+                
+        
+                console.log("Customer data displayed:", data); // Log customer data to the console
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+        </script>
+        
+</body>
+</html>

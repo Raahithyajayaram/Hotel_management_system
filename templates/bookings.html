@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings Management - LUXE Hotel</title>
+    <link rel="stylesheet" href="/style1.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Bookings Management</h1>
+        <p>LUXE Hotel</p>
+    </div>
+
+    <div class="container">
+        <a href="/" class="back-btn">Back to Home</a>
+        
+        <div class="booking-form form">
+            <h2>Add New Booking</h2>
+            <form id="bookingForm" action="/add-booking" method="POST">
+                <div class="form-group">
+                    <label for="customer_id">Customer ID</label>
+                    <input type="text" id="customer_id" name="customer_id" required>
+                </div>
+                <div class="form-group">
+                    <label for="room_id">Room ID</label>
+                    <input type="text" id="room_id" name="room_id" required>
+                </div>
+                <div class="form-group">
+                    <label for="check_in">Check-In Date</label>
+                    <input type="date" id="check_in" name="check_in" required>
+                </div>
+                <div class="form-group">
+                    <label for="check_out">Check-Out Date</label>
+                    <input type="date" id="check_out" name="check_out" required>
+                </div>
+                <div class="form-group">
+                    <label for="number_of_guests">Number of Guests</label>
+                    <input type="number" id="number_of_guests" name="number_of_guests" required>
+                </div>
+                <div class="form-group">
+                    <label for="total_amount">Total Amount</label>
+                    <input type="number" step="0.01" id="total_amount" name="total_amount" required>
+                </div>
+                <div class="form-group">
+                    <label for="room_type">Room Type</label>
+                    <select id="room_type" name="room_type" required>
+                        <option value="Suite">Suite</option>
+                        <option value="Deluxe">Deluxe</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Add Booking</button>
+            </form>
+        </div>
+
+        
+    </div>
+    
+    
+    
+</body>
+</html>

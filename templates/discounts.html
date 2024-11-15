@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discounts Management - LUXE Hotel</title>
+    <link rel="stylesheet" href="/style1.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Discounts Management</h1>
+        <p>LUXE Hotel</p>
+    </div>
+
+    <div class="container">
+        <a href="/" class="back-btn">Back to Home</a>
+        
+        <div class="discount-form form">
+            <h2>Add Discount</h2>
+            <form id="discountForm" action="/add-discount" method="POST">
+                <div class="form-group">
+                    <label for="discount_code">Discount Code</label>
+                    <input type="text" id="discount_code" name="discount_code" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Discount Type</label>
+                    <input type="text" id="description" name="description" required> <!-- change from discountType -->
+                </div>
+                <div class="form-group">
+                    <label for="discount_percentage">Discount Value (%)</label>
+                    <input type="number" step="0.01" id="discount_percentage" name="discount_percentage" required> <!-- change from discountValue -->
+                </div>
+                <button type="submit" class="submit-btn">Add Discount</button>
+            </form>
+        </div>
+       
+
+        <div class="discount-form form">
+            <h2>Update Discount</h2>
+            <form id="discountForm" action="/update-discount" method="POST">
+                <div class="form-group">
+                    <label for="discount_code">Discount Code</label>
+                    <input type="text" id="discount_code" name="discount_code" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Discount Type</label>
+                    <input type="text" id="description" name="description" required>
+                </div>
+                <div class="form-group">
+                    <label for="discount_percentage">Discount Value (%)</label>
+                    <input type="number" step="0.01" id="discount_percentage" name="discount_percentage" required>
+                </div>
+                <button type="submit" class="submit-btn">Update Discount</button>
+            </form>
+        </div>
+       
+
+        <div class="discount-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Discount ID</th>
+                        <th>Discount Type</th>
+                        <th>Discount Value (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Sample data populated by backend -->
+                    <tr>
+                        <td>DC001</td>
+                        <td>Seasonal</td>
+                        <td>10</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</body>
+</html>
